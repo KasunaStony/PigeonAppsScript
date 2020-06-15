@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <style>
+    .myButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #f6f6f6));
+	background:-moz-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-webkit-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-o-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-ms-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0);
+	background-color:#ffffff;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:Arial;
+	font-size:10px;
+	font-weight:bold;
+	padding:6px 20px;
+	text-decoration:none;
+   }
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f6f6f6), color-stop(1, #ffffff));
+	background:-moz-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-webkit-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-o-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-ms-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f6f6', endColorstr='#ffffff',GradientType=0);
+	background-color:#f6f6f6;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+  </style>
+    <base target="_top">
+    <script>
+    function setSheet(){
+    google.script.run.withSuccessHandler().mythQuoteSheet();
+    google.script.host.close();
+    }
+    function showNextQuote(id){
+    var img = document.getElementById("quote");
+    img.src = "https://docs.google.com/uc?id=" + id;
+    }
+    function getNextId(lastRow){
+    google.script.run.withSuccessHandler(showNextQuote).nextQuote(Math.floor(Math.random() * (lastRow - 2) + 1) + 2);
+    }
+
+    </script>
+  </head>
+  <body>
+  <p>神话求求各位接个坑呀</p>
+  <p>“每次打开表格还可以迫害组长哦~”</p>
+  <br/>
+  <? ss=SpreadsheetApp.getActiveSpreadsheet().getSheetByName("神话语录数据库");
+    lastRow=ss.getLastRow();
+    randomRow = Math.floor(Math.random() * (lastRow - 2) + 1) + 2;
+    id = ss.getRange(randomRow, 2).getValue().toString(); ?>
+    <img id="quote" src=<?= "https://docs.google.com/uc?id=" + id ?> alt="哎呀神话不见了" width=100% height=100%>
+    <button name = "next" id =<?=lastRow?> onclick="getNextId(this.id)">我还要</button>
+    <button onclick = "setSheet()">我全都要</button>
+  </body>
+</html>
+

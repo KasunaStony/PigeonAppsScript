@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <script>
+      function preventFormSubmit() {
+        var forms = document.querySelectorAll('form');
+        for (var i = 0; i < forms.length; i++) {
+          forms[i].addEventListener('submit', function(event) {
+            event.preventDefault();
+          });
+        }
+      }
+      window.addEventListener('load', preventFormSubmit);
+    
+      function handleFormSubmit(formObject) {
+        google.script.run.withSuccessHandler().addNewTask(formObject);
+        google.script.host.close();
+      }
+    </script>
+  </head>
+  <body>
+    <p>以下内容若没有就空着不填</p>
+    <form id="MyForm" onSubmit="handleFormSubmit(this)">
+      <p>视频名称： <input name="name" type="text"/></p>
+      <p>视频地址：<input name="adss" type="text"/></p>
+      <p>分类：    <input name="cata" type="radio" value="game"/>游戏 <input name="cata" type="radio" value="anime"/>动漫</p>
+      <p>语言：    <input name="lang" type="radio" value="EN"/>英 <input name="lang" type="radio" value="JP"/>日</p>
+      <p>听译难度： <input name="diff" type="text"/></p>
+      <p>视频类型： <input name="type" type="text"/></p>
+      <p>大概内容： <input name="abst" type="text"/></p>
+      <p>校对人员： <input name="pfrd" type="text"/></p>
+      <p>翻译段落填写时间区段，例：0000-1919</p>
+      <p>翻译段落A：<input name="frg1" type="text"/></p>
+      <p>翻译段落B：<input name="frg2" type="text"/></p>
+      <p>翻译段落C：<input name="frg3" type="text"/></p>      
+      <input type="submit" value="挖坑完毕！" />
+    </form>
+  </body>
+</html>
+
+

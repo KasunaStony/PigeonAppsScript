@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <style>
+  .myButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #f6f6f6));
+	background:-moz-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-webkit-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-o-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-ms-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0);
+	background-color:#ffffff;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:Arial;
+	font-size:10px;
+	font-weight:bold;
+	padding:6px 20px;
+	text-decoration:none;
+   }
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f6f6f6), color-stop(1, #ffffff));
+	background:-moz-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-webkit-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-o-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-ms-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f6f6', endColorstr='#ffffff',GradientType=0);
+	background-color:#f6f6f6;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+  </style>
+    <base target="_top">
+    <script>
+      function callback(id) {
+        google.script.run.withSuccessHandler().newTakeTask(id);
+      }
+    </script>
+  </head>
+  <body>
+    <? ss=SpreadsheetApp.getActiveSpreadsheet().getSheetByName("接坑处");
+    lastRow=ss.getLastRow();
+    noTask=true;
+    for(i=1;i<=lastRow;++i)
+      if(ss.getRange(i,1).getBackground().equals("#f4cccc") && !ss.getRange(i,1).isBlank() &&
+      (ss.getRange(i,6).isBlank() || ss.getRange(i,7).isBlank() || ss.getRange(i,9).isBlank() || ss.getRange(i,11).isBlank() || ss.getRange(i,13).isBlank())) { ?>
+      <p><a href=<?= ss.getRange(i,14).getValue()?> target="_blank"><?= ss.getRange(i,1).getValue()?></a><p>大致内容：<?= ss.getRange(i,5).getValue()?></p>
+      <? if(ss.getRange(i,6).isBlank()) { ?>
+        <button class="myButton" id=<?= i+"pfrd"?> onclick="callback(this.id)">我来组成校对</button> 
+      <? } ?>
+      <? if(ss.getRange(i,7).isBlank()) { ?>
+        <button class="myButton" id=<?= i+"tmln"?> onclick="callback(this.id)">我来组成时轴</button> 
+      <? } ?>
+      <? if(ss.getRange(i,9).isBlank()) { ?>
+        <p>时间段1: <?=ss.getRange(i, 8).getValue()?>  <button class="myButton" id=<?= i+"frg1"?> onclick="callback(this.id)">我来组成本段翻译</button> 
+      <? } ?>
+      <? if(ss.getRange(i,11).isBlank()) { ?>
+        <p>时间段2: <?=ss.getRange(i, 10).getValue()?>  <button class="myButton" id=<?= i+"frg2"?> onclick="callback(this.id)">我来组成本段翻译</button> 
+      <? } ?>
+      <? if(ss.getRange(i,13).isBlank()) { ?>
+        <p>时间段3: <?=ss.getRange(i, 12).getValue()?>  <button class="myButton" id=<?= i+"frg3"?> onclick="callback(this.id)">我来组成本段翻译</button> 
+      <? } ?> <br><hr />
+    <? noTask=false;} ?>
+    <? if(noTask) { ?>
+      <p>没有坑可接了。神话出来挨打！</p>
+    <? } ?>
+  </body>
+</html>
+
+
+
+
