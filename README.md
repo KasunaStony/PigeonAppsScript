@@ -1,14 +1,14 @@
 # PigeonAppsScript
 星际鸽子字幕组脚本
 
-Acknowledgement: 
-Developed by StarPigeon Translation Group:
-    Myth
-    巫师
-    ist
-    Veraku
-    KasunaS
-
+Acknowledgement:  
+Developed by StarPigeon Translation Group：  
+    Myth  
+    巫师  
+    ist  
+    Veraku  
+    KasunaS  
+  
 一.
 dev_version是开发用的，对应[Copy of 鸽子组安排] https://docs.google.com/spreadsheets/d/1HV5tlxEqK7SGuEg-Rq2F-geWWH8yvolk3WJPDGLdacQ/edit#gid=0
 
